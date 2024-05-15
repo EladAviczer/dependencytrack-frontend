@@ -125,7 +125,10 @@ export default {
         userStore: new Oidc.WebStorageStateStore(),
         authority: this.$oidc.ISSUER,
         client_id: this.$oidc.CLIENT_ID,
-        redirect_uri: `${window.location.origin}/static/oidc-callback.html`,
+        redirect_uri:
+          getContextPath() !== ''
+            ? `${window.location.origin}${getContextPath()}/static/oidc-callback.html`
+            : `${window.location.origin}/static/oidc-callback.html`,
         response_type:
           this.$oidc.FLOW === 'implicit' ? 'token id_token' : 'code',
         scope: this.$oidc.SCOPE,
